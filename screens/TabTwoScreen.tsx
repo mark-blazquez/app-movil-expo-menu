@@ -1,37 +1,72 @@
-import { StyleSheet } from 'react-native';
-import { load } from '../api';
+import React from 'react'
+import { View, TextInput, Button, StyleSheet, Alert } from 'react-native'
+import { useForm, useController } from 'react-hook-form'
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+function Input({ name, control }) {
+  const { field } = useController({
+    control,
+    name
+  })
 
-export default function TabTwoScreen() {
-	const { register, handleSubmit } = useForm();
-  	const [data, setData] = useState("");
+  return (
+    <TextInput
+      style={styles.input}
+      value={field.value}
+      onChangeText={field.onChange}
+      placeholder={name}
+    />
+  )
+}
 
-	return (
+function HookForm() {
+  const { control, handleSubmit } = useForm()
+
+  const onSubmit = data => {
+	try {
+		fetch('http://192.168.2.30:8080/api/nuevo',{
+			method: 'post',
+			headers:{
+				'accept': 'application/json',
+				'content-type': 'appplication/json'
+			},
+			/*body:JSON.stringify({
+				nombre:'',
+				pollo:'',
+				patatas:
+			})*/
+			body:JSON.stringify(data)
+		});
+		//Alert.alert('Form Submitted!', JSON.stringify(data), [{ text: 'OK' }])
+
+	} catch (error) {
+		console.error(error);
+	}
+  }
+
+  return (
     <View style={styles.container}>
-      <Text style={styles.title}>Formulario</Text>
-	  
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-	  
-      
+      <Input name="nombre" control={control} />
+      <Input name="pollo" control={control} />
+	  <Input name="patatas" control={control} />
+	  <Input   name="id" control={control} />
+
+
+
+      <Button title="añadir" onPress={handleSubmit(onSubmit)} />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'whitesmoke'
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+  input: {
+    paddingHorizontal: 10,
+    height: 40,
+    margin: 12,
+    borderWidth: 1
+  }
+})
+
+export default HookForm
