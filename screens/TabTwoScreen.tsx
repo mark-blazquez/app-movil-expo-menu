@@ -10,8 +10,7 @@ const Form = () => {
 		nombre:"",
 		pollo:"",
 		patatas:"",
-		//id: Math.random()
-		id :""
+		id: Math.random()
 	})
 
 	//actualiza los datos vacios pasando los datos del form
@@ -26,38 +25,32 @@ const Form = () => {
 
   return (
     <SafeAreaView>
-		  <TextInput
-			  style={styles.input}
-			  placeholder="nombre"
-		  		onChangeText={(text)=>handleChange('nombre',text)}
+			<TextInput
+				style={styles.input}
+				placeholder="nombre"
+				//le pasa texto y sustitulle el objeto vacio por ese texto
+					onChangeText={(text)=>handleChange('nombre',text)}
 
-		  />
-		  <TextInput
-			  style={styles.input}
-			  placeholder="pollo"
-			  keyboardType="numeric"
-			  onChangeText={(text)=>handleChange('pollo',text)}
+			/>
+			<TextInput
+				style={styles.input}
+				placeholder="pollo"
+				keyboardType="numeric"
+				onChangeText={(text)=>handleChange('pollo',text)}
 
-		  />
-		  <TextInput
-			  style={styles.input}
-			  placeholder="patatas"
-			  keyboardType="numeric"
-			  onChangeText={(text)=>handleChange('patatas',text)}
+			/>
+			<TextInput
+				style={styles.input}
+				placeholder="patatas"
+				keyboardType="numeric"
+				onChangeText={(text)=>handleChange('patatas',text)}
 
-		  /> 
-		  <TextInput
-			  style={styles.input}
-			  placeholder="id"
-			  keyboardType="numeric"
-			  //value= {Math.random()}
-			  onChangeText={(text)=>handleChange('id',text)}
+			/> 
 
-		  />
-		  <Button
-			  onPress={handleSubmit}
-			  title="enviar"
-		  />
+			<Button
+				onPress={handleSubmit}
+				title="enviar"
+			/>
 
 
     </SafeAreaView>

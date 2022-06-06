@@ -8,6 +8,7 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar,ActivityIndic
 
 
 
+
 const FlatListBasics = () => {
 
 	//define el contenido una vez se obtiene
@@ -16,7 +17,8 @@ const FlatListBasics = () => {
   
 	const getdata = async () => {
 		try {
-			const response = await fetch('http://192.168.2.30:8080/api/muestra');
+			//const response = await fetch('http://192.168.2.30:8080/api/muestra');
+			const response = await fetch('https://192.168.68.113:8080/api/muestra');
 			//const response = await fetch('https://torre-ubuntu.ddns.net:31059/api/muestra');
 
 			const json = await response.json();
@@ -39,7 +41,8 @@ const FlatListBasics = () => {
 		  <FlatList
 			data={data}
 			renderItem={({ item }) => (
-			  <Text>nombre {item.nombre} pollos {item.pollo} patatas {item.patatas} </Text>
+				//extraccion de la info
+			  <Text>nombre {item.nombre} pollos {item.pollo} patatas {item.patatas} id {item.id}</Text>
 			  
 			)}
 		  />
