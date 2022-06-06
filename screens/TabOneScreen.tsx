@@ -17,8 +17,10 @@ const FlatListBasics = () => {
 	const getdata = async () => {
 		try {
 			const response = await fetch('http://192.168.2.30:8080/api/muestra');
+			//const response = await fetch('https://torre-ubuntu.ddns.net:31059/api/muestra');
+
 			const json = await response.json();
-			console.log(json)
+			//console.log(json)
 			setData(json.pedidos);
 		} catch (error) {
 			console.error(error);
@@ -38,8 +40,10 @@ const FlatListBasics = () => {
 			data={data}
 			renderItem={({ item }) => (
 			  <Text>nombre {item.nombre} pollos {item.pollo} patatas {item.patatas} </Text>
+			  
 			)}
 		  />
+		  
 		)}
 	  </View>
 	);

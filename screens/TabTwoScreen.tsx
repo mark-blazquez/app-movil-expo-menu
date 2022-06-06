@@ -1,72 +1,78 @@
-import React from 'react'
-import { View, TextInput, Button, StyleSheet, Alert } from 'react-native'
-import { useForm, useController } from 'react-hook-form'
+import React, { useState } from "react";
+import { SafeAreaView, StyleSheet, TextInput,Button ,Alert} from "react-native";
+import { saveData } from "./api";
 
-function Input({ name, control }) {
-  const { field } = useController({
-    control,
-    name
-  })
 
-  return (
-    <TextInput
-      style={styles.input}
-      value={field.value}
-      onChangeText={field.onChange}
-      placeholder={name}
-    />
-  )
-}
+const Form = () => {
 
-function HookForm() {
-  const { control, handleSubmit } = useForm()
+	//crea el objeto vacio
+	const [data ,setdata] = useState({
+		nombre:"",
+		pollo:"",
+		patatas:"",
+		//id: Math.random()
+		id :""
+	})
 
-  const onSubmit = data => {
-	try {
-		fetch('http://192.168.2.30:8080/api/nuevo',{
-			method: 'post',
-			headers:{
-				'accept': 'application/json',
-				'content-type': 'appplication/json'
-			},
-			/*body:JSON.stringify({
-				nombre:'',
-				pollo:'',
-				patatas:
-			})*/
-			body:JSON.stringify(data)
-		});
-		//Alert.alert('Form Submitted!', JSON.stringify(data), [{ text: 'OK' }])
+	//actualiza los datos vacios pasando los datos del form
+	const handleChange = (name:any,value:any) => setdata({...data, [name]:value})
 
-	} catch (error) {
-		console.error(error);
+	//lo guarda en el backend
+	const handleSubmit=  () =>{
+		//console.log(data)
+		saveData(data)
 	}
-  }
+
 
   return (
-    <View style={styles.container}>
-      <Input name="nombre" control={control} />
-      <Input name="pollo" control={control} />
-	  <Input name="patatas" control={control} />
-	  <Input   name="id" control={control} />
+    <SafeAreaView>
+		  <TextInput
+			  style={styles.input}
+			  placeholder="nombre"
+		  		onChangeText={(text)=>handleChange('nombre',text)}
+
+		  />
+		  <TextInput
+			  style={styles.input}
+			  placeholder="pollo"
+			  keyboardType="numeric"
+			  onChangeText={(text)=>handleChange('pollo',text)}
+
+		  />
+		  <TextInput
+			  style={styles.input}
+			  placeholder="patatas"
+			  keyboardType="numeric"
+			  onChangeText={(text)=>handleChange('patatas',text)}
+
+		  /> 
+		  <TextInput
+			  style={styles.input}
+			  placeholder="id"
+			  keyboardType="numeric"
+			  //value= {Math.random()}
+			  onChangeText={(text)=>handleChange('id',text)}
+
+		  />
+		  <Button
+			  onPress={handleSubmit}
+			  title="enviar"
+		  />
 
 
-
-      <Button title="añadir" onPress={handleSubmit(onSubmit)} />
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'whitesmoke'
-  },
   input: {
-    paddingHorizontal: 10,
     height: 40,
     margin: 12,
-    borderWidth: 1
-  }
-})
+    borderWidth: 1,
+    padding: 10,
+  },
+});
 
-export default HookForm
+export default Form;
+
+//-------------------------------------------------------------------
