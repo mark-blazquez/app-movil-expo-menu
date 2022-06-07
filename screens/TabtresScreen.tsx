@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, TextInput,Button ,Alert} from "react-native";
 import { deleteData } from "./api";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-const Form = () => {
+const Form = ({ navigation }) => {
 
 	//crea el objeto vacio
 	const [data ,setdata] = useState({
@@ -17,6 +19,8 @@ const Form = () => {
 	const handleSubmit=  () =>{
 		//console.log(data)
 		deleteData(data)
+		navigation.navigate('TabOne')
+
 	}
 
 

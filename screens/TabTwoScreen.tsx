@@ -5,7 +5,8 @@ import { saveData } from "./api";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Form = ({ navigator }) => {
+
+const Form = function HomeScreen({ navigation }) {
 
 	//crea el objeto vacio
 	const [data ,setdata] = useState({
@@ -23,7 +24,7 @@ const Form = ({ navigator }) => {
 	const handleSubmit=  () =>{
 		//console.log(data)
 		saveData(data)
-		navigator.navigate('TabOneScreen')
+		navigation.navigate('TabOne')
 	}
 
 
@@ -71,5 +72,3 @@ const styles = StyleSheet.create({
 });
 
 export default Form;
-
-//-------------------------------------------------------------------
