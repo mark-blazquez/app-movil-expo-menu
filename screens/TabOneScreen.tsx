@@ -36,7 +36,9 @@ const App = () => {
 	}
   //para que se haga cada vez que se recarga la pag
 	useEffect(() => {
-	  getdata();
+		setRefreshing(true)
+	  	getdata();
+		setRefreshing(false)
 	}, []);
 
   return (
@@ -59,7 +61,7 @@ const App = () => {
 					{/*<Text style={styles.tabla}>nombre {item.nombre} pollos {item.pollo} patatas {item.patatas} id {item.id}</Text>*/}
 					<Text >Nombre {item.nombre} </Text>
 					<Text >Pollos {item.pollo}  Patatas {item.patatas} </Text>
-					<TextInput>Id {item.id}</TextInput>
+					<Text selectable={true} >Id {item.id}</Text>
 				</View>
 				)}
 				
