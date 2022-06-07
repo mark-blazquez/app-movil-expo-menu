@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, TextInput,Button ,Alert} from "react-native";
 import { saveData } from "./api";
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Form = () => {
+const Form = ({ navigator }) => {
 
 	//crea el objeto vacio
 	const [data ,setdata] = useState({
@@ -17,9 +19,11 @@ const Form = () => {
 	const handleChange = (name:any,value:any) => setdata({...data, [name]:value})
 
 	//lo guarda en el backend
+	
 	const handleSubmit=  () =>{
 		//console.log(data)
 		saveData(data)
+		navigator.navigate('TabOneScreen')
 	}
 
 

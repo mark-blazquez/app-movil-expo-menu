@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@alentoma/react-native-selectable-text@^1.5.6":
+  "integrity" "sha512-rlvYUNn+NcD3y9l0UvK1gbioUz2r8LcZKX7AFSEkYzkRBJxVHxwp6ePMlGDvAKfBsIsxfZU99VGoZ1yLiAMqcw=="
+  "resolved" "https://registry.npmjs.org/@alentoma/react-native-selectable-text/-/react-native-selectable-text-1.5.6.tgz"
+  "version" "1.5.6"
+  dependencies:
+    "fast-memoize" "^2.5.1"
+    "uuid" "^3.3.2"
+
 "@ampproject/remapping@^2.1.0":
   "integrity" "sha512-qRmjj8nj9qmLTQXXmaR1cck3UXSRMPrbsLJAasZpF+t3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w=="
   "resolved" "https://registry.npmjs.org/@ampproject/remapping/-/remapping-2.2.0.tgz"
@@ -3930,6 +3938,11 @@
   "integrity" "sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc="
   "resolved" "https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz"
   "version" "2.0.6"
+
+"fast-memoize@^2.5.1":
+  "integrity" "sha512-Ue0LwpDYErFbmNnZSF0UH6eImUwDmogUO1jyE+JbN2gsQz/jICm1Ve7t9QT0rNSsfJt+Hs4/S3GnsDVjL4HVrw=="
+  "resolved" "https://registry.npmjs.org/fast-memoize/-/fast-memoize-2.5.2.tgz"
+  "version" "2.5.2"
 
 "fastq@^1.6.0":
   "integrity" "sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw=="

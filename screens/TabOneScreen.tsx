@@ -1,24 +1,29 @@
-//import { FlatList, StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../components/EditScreenInfo';
-//import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
+import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text,FlatList } from 'react-native';
 import React,{useEffect,useState} from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar,ActivityIndicator } from 'react-native';
+import { View } from '../components/Themed';
+import { SelectableText } from "@alentoma/react-native-selectable-text";
 
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
+const App = () => { 
+	//esto permite haceer la reacarga
+  const [refreshing, setRefreshing] = React.useState(false);
 
-const FlatListBasics = () => {
-
-	//define el contenido una vez se obtiene
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+  //define el contenido una vez se obtiene
 	const [isLoading, setLoading] = useState(true);
 	const [data, setData] = useState([]);
   
 	const getdata = async () => {
 		try {
-			//const response = await fetch('http://192.168.2.30:8080/api/muestra');
-			const response = await fetch('https://192.168.68.113:8080/api/muestra');
+			const response = await fetch('http://192.168.2.122:8080/api/muestra');
+			//const response = await fetch('https://192.168.68.113:8080/api/muestra');
 			//const response = await fetch('https://torre-ubuntu.ddns.net:31059/api/muestra');
 
 			const json = await response.json();
@@ -34,21 +39,52 @@ const FlatListBasics = () => {
 	useEffect(() => {
 	  getdata();
 	}, []);
-  
-	return (
-	  <View style={{ flex: 1, padding: 24 }}>
-		{isLoading ? <ActivityIndicator/> : (
-		  <FlatList
-			data={data}
-			renderItem={({ item }) => (
+
+  return (
+    <SafeAreaView >
+      <ScrollView
+        
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+			//ejeccuta la funcion de obtener los pedidos
+            onRefresh={getdata}
+          />
+        }
+      >
+		<FlatList  
+
+				data={data}
+				renderItem={({ item }) => (
 				//extraccion de la info
-			  <Text>nombre {item.nombre} pollos {item.pollo} patatas {item.patatas} id {item.id}</Text>
-			  
-			)}
-		  />
-		  
-		)}
-	  </View>
-	);
+				<View style={styles.tabla}>
+					{/*<Text style={styles.tabla}>nombre {item.nombre} pollos {item.pollo} patatas {item.patatas} id {item.id}</Text>*/}
+					<Text >nombre {item.nombre} </Text>
+					<Text > pollos {item.pollo}</Text>
+					<Text > patatas {item.patatas} </Text>
+					<Text > id {item.id}</Text>
+
+				</View>
+				)}
+				
+		/>
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
-export default FlatListBasics;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
+  tabla :{
+	  backgroundColor: 'aquamarine',
+	  flex: 1,
+	  alignItems: 'center',
+	  justifyContent: 'center',
+	  padding:5
+  }
+});
+
+export default App;
