@@ -1,7 +1,6 @@
-import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text,FlatList } from 'react-native';
+import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text,FlatList,TextInput } from 'react-native';
 import React,{useEffect,useState} from 'react';
 import { View } from '../components/Themed';
-import { SelectableText } from "@alentoma/react-native-selectable-text";
 
 
 const wait = (timeout) => {
@@ -41,7 +40,7 @@ const App = () => {
 	}, []);
 
   return (
-    <SafeAreaView >
+    <SafeAreaView style={styles.tabla}>
       <ScrollView
         
         refreshControl={
@@ -60,9 +59,10 @@ const App = () => {
 				<View style={styles.tabla}>
 					{/*<Text style={styles.tabla}>nombre {item.nombre} pollos {item.pollo} patatas {item.patatas} id {item.id}</Text>*/}
 					<Text >nombre {item.nombre} </Text>
-					<Text > pollos {item.pollo}</Text>
-					<Text > patatas {item.patatas} </Text>
-					<Text > id {item.id}</Text>
+					<Text >pollos {item.pollo}  patatas {item.patatas} </Text>
+					<TextInput  >id {item.id}</TextInput>
+					<Text >-----------------------------------------</Text>
+
 
 				</View>
 				)}
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
 
   tabla :{
-	  backgroundColor: 'aquamarine',
+	  backgroundColor: 'white',
 	  flex: 1,
 	  alignItems: 'center',
 	  justifyContent: 'center',
