@@ -13,7 +13,7 @@ const Form = function HomeScreen({ navigation }) {
 		nombre:"",
 		pollo:"",
 		patatas:"",
-		id: Math.random()
+		id: ""
 	})
 
 	//actualiza los datos vacios pasando los datos del form
@@ -51,6 +51,13 @@ const Form = function HomeScreen({ navigation }) {
 				onChangeText={(text)=>handleChange('patatas',text)}
 
 			/> 
+			<TextInput
+				style={styles.input}
+				placeholder="id"
+				keyboardType="numeric"
+				onChangeText={(text)=>handleChange('id',text)}
+
+			/>
 
 			<Button
 				onPress={handleSubmit}

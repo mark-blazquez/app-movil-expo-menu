@@ -22,8 +22,8 @@ const App = () => {
 	const getdata = async () => {
 		try {
 			//const response = await fetch('http://192.168.2.122:8080/api/muestra');
-			const response = await fetch('http://192.168.68.113:8080/api/muestra');
-			//const response = await fetch('https://torre-ubuntu.ddns.net:31059/api/muestra');
+			//const response = await fetch('http://192.168.68.113:8080/api/muestra');
+			const response = await fetch('http://torre-ubuntu.ddns.net:31059/api/muestra');
 
 			const json = await response.json();
 			//console.log(json)
